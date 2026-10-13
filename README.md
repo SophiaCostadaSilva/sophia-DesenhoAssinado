@@ -22,6 +22,6 @@ Framework preset: `None`. Build command: vazio. Build output directory: `public`
 
 ## Identificação (preencha após o fork)
 
-Nome: 
-RA: 
-URL: https://
+Nome: Sophia Costa da Silva
+RA: 2026108273
+URL: https://sophiadesenhoassinado1.pages.dev

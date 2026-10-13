@@ -1,129 +1,357 @@
 :root {
-  --fundo: #0d1117;
-  --superficie: #161b22;
-  --borda: #30363d;
-  --texto: #e6edf3;
-  --texto-suave: #8b949e;
-  --destaque: #58a6ff;
-  --erro: #ff7b72;
+  --cor-principal: #00A19C;
+  --cor-hover: #00BCB5;
+  --cor-fundo: #07131F;
+  --cor-cartao: #0C1D2B;
+  --cor-cartao-claro: #102635;
+  --cor-borda: rgba(0, 161, 156, 0.45);
+  --cor-texto: #F1F7FA;
+  --cor-texto-secundario: #A8C2D2;
+  --cor-sucesso: #64E8D8;
+  --cor-erro: #FF7777;
+  --sombra: 0 12px 35px rgba(0, 0, 0, 0.2);
 }
+
+/* Configuração geral */
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--fundo);
-  color: var(--texto);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.5;
+  padding: 42px 20px 24px;
+  color: var(--cor-texto);
+  font-family: "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(
+      ellipse at top left,
+      rgba(0, 161, 156, 0.12),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at bottom right,
+      rgba(0, 161, 156, 0.08),
+      transparent 40%
+    ),
+    var(--cor-fundo);
 }
 
+/* Área principal */
+
 main {
-  max-width: 720px;
+  width: 100%;
+  max-width: 940px;
   margin: 0 auto;
-  padding: 48px 16px;
+}
+
+/* Cabeçalho */
+
+header {
+  margin-bottom: 28px;
+  padding: 0 8px;
 }
 
 h1 {
-  margin: 0 0 8px;
-  font-family: Georgia, serif;
-  font-weight: normal;
-  font-size: 2.4rem;
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+}
+
+h1::after {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-left: 9px;
+  border-radius: 50%;
+  background: var(--cor-principal);
+  box-shadow: 0 0 15px var(--cor-principal);
 }
 
 header p {
-  margin: 0 0 32px;
-  color: var(--texto-suave);
+  max-width: 680px;
+  margin: 0;
+  color: var(--cor-texto-secundario);
+  font-size: 1.05rem;
+  line-height: 1.8;
 }
 
-form {
+/* Título das seções */
+
+h2 {
+  margin: 0 0 18px;
+  font-size: 1.2rem;
+}
+
+/* Cartão de login */
+
+section[aria-labelledby="titulo-login"] {
+  margin-bottom: 18px;
+  padding: 25px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(16, 38, 53, 0.96),
+    rgba(7, 26, 39, 0.96)
+  );
+  box-shadow: var(--sombra);
+}
+
+/* Espaço do botão Google */
+
+#google-login {
+  min-height: 42px;
+  margin-bottom: 15px;
+}
+
+/* Mensagem de login */
+
+#status-login {
+  margin: 12px 0 0;
+  padding: 12px 15px;
+  border: 1px solid rgba(0, 161, 156, 0.35);
+  border-radius: 12px;
+  color: var(--cor-sucesso);
+  background: rgba(0, 161, 156, 0.09);
+  line-height: 1.6;
+}
+
+/* Formulário de desenho */
+
+#formulario {
   display: grid;
-  grid-template-columns: 1fr 2fr auto;
-  grid-template-rows: auto auto;
-  grid-auto-flow: column;
-  gap: 6px 12px;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 1.1fr);
   align-items: end;
-  padding: 20px;
-  background: var(--superficie);
-  border: 1px solid var(--borda);
-  border-radius: 10px;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 24px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 20px;
+  background: var(--cor-cartao);
+  box-shadow: var(--sombra);
 }
 
-label {
-  font-size: 0.85rem;
-  color: var(--texto-suave);
+/* Rótulo do número */
+
+#formulario label {
+  grid-column: 1 / -1;
+  margin-bottom: -8px;
+  color: var(--cor-texto-secundario);
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
-input {
+/* Campo numérico */
+
+#numero {
   width: 100%;
-  padding: 10px 12px;
+  min-width: 0;
+  height: 54px;
+  padding: 0 16px;
+  border: 1px solid #345060;
+  border-radius: 12px;
+  outline: none;
+  color: var(--cor-texto);
+  background: #081621;
   font: inherit;
-  color: var(--texto);
-  background: var(--fundo);
-  border: 1px solid var(--borda);
-  border-radius: 6px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-input:focus {
-  outline: 2px solid var(--destaque);
-  outline-offset: 1px;
+#numero:focus {
+  border-color: var(--cor-principal);
+  box-shadow: 0 0 0 4px rgba(0, 161, 156, 0.15);
 }
+
+/* Botões */
 
 button {
-  padding: 10px 20px;
+  min-height: 50px;
+  padding: 13px 22px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: #FFFFFF;
+  background: var(--cor-principal);
   font: inherit;
-  font-weight: 600;
-  color: var(--fundo);
-  background: var(--destaque);
-  border: none;
-  border-radius: 6px;
+  font-weight: 700;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-form button {
-  grid-row: 2;
+#formulario button {
+  min-height: 54px;
 }
 
 button:hover {
-  filter: brightness(1.1);
+  background: var(--cor-hover);
+  box-shadow: 0 5px 22px rgba(0, 161, 156, 0.22);
+  transform: translateY(-2px);
 }
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus-visible {
+  outline: 3px solid #FFFFFF;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mensagens de erro e resultado */
 
 #mensagem {
-  min-height: 1.5em;
-  margin: 12px 0;
-  color: var(--erro);
+  margin: 0 0 14px;
+  color: var(--cor-sucesso);
+  font-weight: 500;
+  line-height: 1.6;
 }
 
-figure {
-  margin: 0;
+#mensagem:empty {
+  display: none;
 }
 
-figure svg {
+/* Área do desenho */
+
+#desenho {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  min-height: 180px;
+  margin: 0 0 18px;
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid var(--cor-borda);
+  border-radius: 20px;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0, 161, 156, 0.055),
+      transparent 65%
+    ),
+    #080F18;
+  box-shadow: var(--sombra);
+}
+
+/* SVG gerado pelo servidor */
+
+#desenho svg {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--borda);
-  border-radius: 10px;
+  max-width: 800px;
+  border-radius: 12px;
 }
+
+/* Botão de baixar */
 
 #baixar {
-  margin-top: 16px;
-  color: var(--texto);
-  background: transparent;
-  border: 1px solid var(--borda);
+  display: block;
+  width: 100%;
+  margin: 0 0 24px;
+  border: 1px solid var(--cor-principal);
+  background: rgba(0, 161, 156, 0.12);
+  color: var(--cor-sucesso);
 }
 
-@media (max-width: 560px) {
-  form {
-    grid-template-columns: 1fr;
-    grid-template-rows: none;
-    grid-auto-flow: row;
+#baixar:hover {
+  background: rgba(0, 161, 156, 0.24);
+}
+
+#baixar[hidden] {
+  display: none;
+}
+
+/* Seleção de texto */
+
+::selection {
+  color: #FFFFFF;
+  background: rgba(0, 161, 156, 0.55);
+}
+
+/* Barra de rolagem */
+
+* {
+  scrollbar-color: var(--cor-principal) var(--cor-fundo);
+}
+
+/* Adaptação para celulares */
+
+@media (max-width: 600px) {
+  body {
+    padding: 25px 12px 18px;
   }
 
-  form button {
-    grid-row: auto;
+  header {
+    padding: 0 4px;
+    margin-bottom: 22px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 0.95rem;
+  }
+
+  section[aria-labelledby="titulo-login"] {
+    padding: 18px;
+  }
+
+  #formulario {
+    grid-template-columns: 1fr;
+    padding: 18px;
+    gap: 14px;
+  }
+
+  #formulario label {
+    grid-column: auto;
+    margin-bottom: -5px;
+  }
+
+  #formulario button {
+    width: 100%;
+  }
+
+  #desenho {
+    padding: 8px;
+    border-radius: 14px;
+  }
+
+  #baixar {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
