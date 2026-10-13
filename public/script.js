@@ -79,7 +79,7 @@ formulario.addEventListener("submit", async (evento) => {
     if (!resposta.ok) {
       if (resposta.status === 400) {
         mensagem.textContent =
-          "Erro:400 - Pedido inválido. Digite um inteiro entre 1 e 100.";
+          "Erro:400";
       } else if (resposta.status === 401) {
         mensagem.textContent =
           "Erro:401 - Autenticação inválida ou expirada. Faça login novamente com o Google.";
