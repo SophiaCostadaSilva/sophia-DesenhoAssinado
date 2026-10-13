@@ -79,13 +79,13 @@ formulario.addEventListener("submit", async (evento) => {
     if (!resposta.ok) {
       if (resposta.status === 400) {
         mensagem.textContent =
-          "Pedido inválido. Digite um inteiro entre 1 e 100.";
+          "Erro:400 - Pedido inválido. Digite um inteiro entre 1 e 100.";
       } else if (resposta.status === 401) {
         mensagem.textContent =
-          "Autenticação inválida ou expirada. Faça login novamente com o Google.";
+          "Erro:401 - Autenticação inválida ou expirada. Faça login novamente com o Google.";
       } else if (resposta.status === 405) {
         mensagem.textContent =
-          "Método não permitido para gerar o desenho.";
+          "Erro:405 - Método não permitido para gerar o desenho.";
       } else {
         mensagem.textContent =
           `Não foi possível gerar o desenho. Erro ${resposta.status}.`;
