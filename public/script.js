@@ -1,4 +1,5 @@
-// public/script.js
+
+ // public/script.js
 // O navegador faz login com o Google e solicita o desenho ao servidor.
 
 const formulario = document.getElementById("formulario");
@@ -59,10 +60,19 @@ formulario.addEventListener("submit", async (evento) => {
     return;
   }
 
-  const numero = Number(campoNumero.value);
+  // Valida o valor digitado antes de enviar ao servidor.
+  const valor = campoNumero.value.trim();
+  const numero = Number(valor);
 
-  if (!Number.isInteger(numero) || numero < 1 || numero > 100) {
-    mensagem.textContent = "Digite um inteiro entre 1 e 100.";
+  if (
+    valor === "" ||
+    !/^\d+$/.test(valor) ||
+    !Number.isInteger(numero) ||
+    numero < 1 ||
+    numero > 100
+  ) {
+    mensagem.textContent =
+      "Erro 400: informe um número inteiro de 1 a 100.";
     return;
   }
 
@@ -77,12 +87,17 @@ formulario.addEventListener("submit", async (evento) => {
     });
 
     if (!resposta.ok) {
-  const detalhe = await resposta.text();
+      const detalhe = await resposta.text();
 
-  mensagem.textContent =
-    `Erro HTTP ${resposta.status}: ${detalhe}`;
-  return;
-}
+      console.error("Erro da API:", {
+        status: resposta.status,
+        mensagem: detalhe
+      });
+
+      mensagem.textContent =
+        `Erro HTTP ${resposta.status}: ${detalhe || "Sem detalhes do servidor."}`;
+      return;
+    }
 
     svgAtual = await resposta.text();
 
@@ -98,8 +113,10 @@ formulario.addEventListener("submit", async (evento) => {
       "image/svg+xml"
     );
 
-    if (documento.querySelector("parsererror") ||
-        documento.documentElement.localName !== "svg") {
+    if (
+      documento.querySelector("parsererror") ||
+      documento.documentElement.localName !== "svg"
+    ) {
       mensagem.textContent = "O servidor retornou um SVG inválido.";
       svgAtual = "";
       return;
