@@ -77,22 +77,12 @@ formulario.addEventListener("submit", async (evento) => {
     });
 
     if (!resposta.ok) {
-      if (resposta.status === 400) {
-        mensagem.textContent =
-          "Erro:400";
-      } else if (resposta.status === 401) {
-        mensagem.textContent =
-          "Erro:401 - Autenticação inválida ou expirada. Faça login novamente com o Google.";
-      } else if (resposta.status === 405) {
-        mensagem.textContent =
-          "Erro:405 - Método não permitido para gerar o desenho.";
-      } else {
-        mensagem.textContent =
-          `Não foi possível gerar o desenho. Erro ${resposta.status}.`;
-      }
+  const detalhe = await resposta.text();
 
-      return;
-    }
+  mensagem.textContent =
+    `Erro HTTP ${resposta.status}: ${detalhe}`;
+  return;
+}
 
     svgAtual = await resposta.text();
 
